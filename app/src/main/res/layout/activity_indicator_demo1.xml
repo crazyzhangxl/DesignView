@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activitys.indicator.IndicatorDemo1Activity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioGroup
+            android:orientation="horizontal"
+            android:id="@+id/rgMain"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:textColor="@color/text_radio_color"
+                android:id="@+id/rbAc1"
+                android:gravity="center"
+                android:text="活动1"
+                android:button="@null"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:textColor="@color/text_radio_color"
+                android:id="@+id/rbAc2"
+                android:gravity="center"
+                android:text="活动2"
+                android:button="@null"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:textColor="@color/text_radio_color"
+                android:id="@+id/rbAc3"
+                android:gravity="center"
+                android:text="活动3"
+                android:button="@null"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp">
+            <ImageView
+                android:id="@+id/imageIndicator"
+                android:background="@drawable/shape_linear"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>
