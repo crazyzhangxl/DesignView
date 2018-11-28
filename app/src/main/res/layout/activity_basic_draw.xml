@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activitys.BasicDrawActivity">
     <!--<com.example.apple.designview.views.BasicDrawView-->
         <!--android:layout_width="match_parent"-->
@@ -15,4 +16,18 @@
         android:background="#ffffff"
         android:layout_width="match_parent"
         android:layout_height="40dp" />
-</android.support.constraint.ConstraintLayout>
+
+    <com.example.apple.designview.views.JumpTextView
+        android:id="@+id/jumpView"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_marginTop="80dp"
+        android:id="@+id/btnStart"
+        android:text="开始"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

@@ -25,8 +25,14 @@
         <activity
             android:name=".activitys.indicator.IndicatorDemo1Activity"
             android:label="RadioGroup+ImageView指示器" />
-        <activity android:name=".activitys.indicator.IndicatorDemo2Activity"
-            android:label="自定义View指示器"/>
+        <activity
+            android:name=".activitys.indicator.IndicatorDemo2Activity"
+            android:label="自定义View指示器" />
+        <activity
+            android:name=".activitys.BezierActivity"
+            android:label="贝塞尔曲线" />
+        <activity android:name=".activitys.indicator.NiceIndicatorActivity" />
+        <activity android:name=".activitys.wheel.WheelViewActivity"></activity>
     </application>
 
 </manifest>

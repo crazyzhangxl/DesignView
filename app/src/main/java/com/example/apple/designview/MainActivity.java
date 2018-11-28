@@ -7,8 +7,11 @@ import android.view.View;
 
 import com.example.apple.designview.activitys.BasicDraw2Activity;
 import com.example.apple.designview.activitys.BasicDrawActivity;
+import com.example.apple.designview.activitys.BezierActivity;
 import com.example.apple.designview.activitys.indicator.IndicatorDemo1Activity;
 import com.example.apple.designview.activitys.indicator.IndicatorDemo2Activity;
+import com.example.apple.designview.activitys.indicator.NiceIndicatorActivity;
+import com.example.apple.designview.activitys.wheel.WheelViewActivity;
 
 /**
  * @author crazyZhangxl on 2018-10-19 8:35:15.
@@ -47,6 +50,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, IndicatorDemo2Activity.class));
+            }
+        });
+
+        findViewById(R.id.btnBezier).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BezierActivity.class));
+            }
+        });
+
+        findViewById(R.id.indicator3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, NiceIndicatorActivity.class));
+            }
+        });
+
+        findViewById(R.id.btnWheel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, WheelViewActivity.class));
             }
         });
     }
