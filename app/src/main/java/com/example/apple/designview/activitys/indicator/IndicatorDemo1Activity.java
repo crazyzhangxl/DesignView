@@ -53,7 +53,6 @@ public class IndicatorDemo1Activity extends AppCompatActivity {
                 //{1. 0->1 1->2 1->0 2->1}
                 Log.e("onPageScrolled",position+",   "+positionOffset+",   "+positionOffsetPixels);
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mIvLinear.getLayoutParams();
-                // (position+positionOffset)*getScreenWidthWidth()/3f 为偏移量;  右边相加的是居中偏移
                 layoutParams.leftMargin = (int)((position+positionOffset)*getScreenWidthWidth()/3f+getScreenWidthWidth()/6-lineWidth/2);
                 mIvLinear.setLayoutParams(layoutParams);
             }

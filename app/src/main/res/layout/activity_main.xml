@@ -6,38 +6,48 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    <Button
-        android:id="@+id/btnBasic"
-        android:text="基础View"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
-        android:text="复习"
-        android:id="@+id/review"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:background="#f00"
+            android:layout_marginLeft="5dp"
+            android:layout_width="2dp"
+            android:layout_height="25dp"/>
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:text="自定义View基础"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
-            android:text="radioGroup+iv"
-            android:textAllCaps="false"
-            android:id="@+id/indicator1"
+            android:id="@+id/btnBasic"
+            android:text="基础View"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
-            android:id="@+id/indicator2"
-            android:text="自定义指示器"
+            android:text="复习"
+            android:id="@+id/review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
-            android:id="@+id/indicator3"
-            android:text="Nice指示器"
+            android:text="进度line"
             android:textAllCaps="false"
+            android:id="@+id/btnLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
+
+
     <Button
         android:id="@+id/btnBezier"
         android:text="贝塞尔曲线学习"
@@ -50,6 +60,47 @@
         <Button
             android:id="@+id/btnWheel"
             android:text="WheelView"
+            android:textAllCaps="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:background="#f00"
+            android:layout_marginLeft="5dp"
+            android:layout_width="2dp"
+            android:layout_height="25dp"/>
+        <TextView
+            android:layout_marginLeft="8dp"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:text="指示器汇总"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="RadioGroup实现"
+            android:textAllCaps="false"
+            android:id="@+id/indicator1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/indicator2"
+            android:text="少数条目"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/indicator3"
+            android:text="Nice指示器"
             android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

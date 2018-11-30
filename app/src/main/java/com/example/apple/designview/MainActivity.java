@@ -8,6 +8,7 @@ import android.view.View;
 import com.example.apple.designview.activitys.BasicDraw2Activity;
 import com.example.apple.designview.activitys.BasicDrawActivity;
 import com.example.apple.designview.activitys.BezierActivity;
+import com.example.apple.designview.activitys.ProgressLineActivity;
 import com.example.apple.designview.activitys.indicator.IndicatorDemo1Activity;
 import com.example.apple.designview.activitys.indicator.IndicatorDemo2Activity;
 import com.example.apple.designview.activitys.indicator.NiceIndicatorActivity;
@@ -35,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, BasicDraw2Activity.class));
+            }
+        });
+
+        findViewById(R.id.btnLine).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ProgressLineActivity.class));
             }
         });
 

@@ -104,7 +104,6 @@ public class SimpleViewPagerIndicator extends LinearLayout
 	private int mTriangleWidth = 14;
 	private int mTriangleHeight = 6;
 
-
 	/**
 	 * 设置与ViewPager的绑定关系
 	 * @param mViewPager 传入ViewPager

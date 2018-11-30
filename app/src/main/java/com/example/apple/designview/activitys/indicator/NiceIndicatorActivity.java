@@ -1,5 +1,6 @@
 package com.example.apple.designview.activitys.indicator;
 
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 
 public class NiceIndicatorActivity extends AppCompatActivity {
-    private NiceViewPagerIndicator mNiceViewPagerIndicator;
+    private NiceViewPagerIndicator mNiceViewPagerIndicator,mNiceViewPagerIndicator2;
     private ViewPager mViewPager;
 
     @Override
@@ -30,6 +31,7 @@ public class NiceIndicatorActivity extends AppCompatActivity {
 
     private void initViews() {
         mNiceViewPagerIndicator = findViewById(R.id.niceIndicator);
+        mNiceViewPagerIndicator2 = findViewById(R.id.niceIndicator2);
         mViewPager = findViewById(R.id.viewPager);
         List<Fragment > fragments = new ArrayList<>();
         List<String> mTitles = new ArrayList<>();
@@ -53,8 +55,15 @@ public class NiceIndicatorActivity extends AppCompatActivity {
         mTitles.add("标题10");
         mViewPager.setAdapter(new NiceFragmentAdapter(getSupportFragmentManager(),fragments,mTitles));
         mViewPager.setCurrentItem(1);
-        mNiceViewPagerIndicator.setIndicatorLengthType(NiceViewPagerIndicator.IndicatorType.ABSOLUTE_LENGTH);
+        mNiceViewPagerIndicator.setIndicatorLengthType(NiceViewPagerIndicator.IndicatorType.ABSOLUTE_LENGTH)
+        .setIndicatorShapeType(NiceViewPagerIndicator.IndicatorShape.TRIANGLE);
         mNiceViewPagerIndicator.setUpViewPager(mViewPager);
+
+        mNiceViewPagerIndicator2.setIndicatorLengthType(NiceViewPagerIndicator.IndicatorType.EQUAL_TEXT)
+                .setIndicatorShapeType(NiceViewPagerIndicator.IndicatorShape.LINEAR)
+                .setIndicatorColor(Color.BLUE);
+
+        mNiceViewPagerIndicator2.setUpViewPager(mViewPager);
     }
 
 

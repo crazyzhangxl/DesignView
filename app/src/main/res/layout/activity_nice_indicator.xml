@@ -7,7 +7,16 @@
     android:orientation="vertical"
     tools:context=".activitys.indicator.NiceIndicatorActivity">
     <com.example.apple.designview.views.nice_indicator.NiceViewPagerIndicator
+        android:background="#900000"
         android:id="@+id/niceIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+    </com.example.apple.designview.views.nice_indicator.NiceViewPagerIndicator>
+
+    <com.example.apple.designview.views.nice_indicator.NiceViewPagerIndicator
+        android:layout_marginTop="15dp"
+        android:background="#fff"
+        android:id="@+id/niceIndicator2"
         android:layout_width="match_parent"
         android:layout_height="50dp">
     </com.example.apple.designview.views.nice_indicator.NiceViewPagerIndicator>

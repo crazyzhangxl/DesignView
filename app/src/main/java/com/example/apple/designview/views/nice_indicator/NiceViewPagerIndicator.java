@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -25,6 +26,8 @@ import android.widget.TextView;
  *               1.支持指示器与文字等长效果 ******;
  *               2.支持指示器与指示器文本等长
  *               3.支持选中调整文字的大小
+ *               4.链式调用 支持各种颜色的修改
+ *               5.支持三角指示器以及下划线指示器效果
  *               和TabLayout效果相类似
  * 注意点:
  * 确保一定在ViewPagerAdapter中返回了:标题字符串,否则 <addTextFromViewPager/> 会报空指针异常
@@ -46,6 +49,17 @@ public class NiceViewPagerIndicator extends HorizontalScrollView{
         ABSOLUTE_LENGTH;
     }
 
+    public enum IndicatorShape{
+        /**
+         * 线性
+         */
+        LINEAR,
+        /**
+         * 三角
+         */
+        TRIANGLE
+    }
+
     /**
      * 记录当前指示器的左右的X轴坐标
      */
@@ -56,6 +70,24 @@ public class NiceViewPagerIndicator extends HorizontalScrollView{
     private ViewPager mViewPager;
     private Context mContext;
     private IndicatorType mIndicatorType = IndicatorType.EQUAL_TEXT;
+    private IndicatorShape mIndicatorShape = IndicatorShape.LINEAR;
+
+    /**
+     * 控件的高度
+     */
+    private int mIndicatorHeight;
+    private int mIndicatorWidth;
+
+    /**
+     * 三角指示器------
+     */
+    private Path mTrianglePath;
+    private int mTriangleWidth = 14;
+    private int mTriangleHeight = 6;
+    private Paint mTrianglePaint;
+
+
+
     /**
      * ScrollView下的唯一子布局
      * 承载容纳文本控件的作用 -----
@@ -129,6 +161,116 @@ public class NiceViewPagerIndicator extends HorizontalScrollView{
      * scrollView整体滚动的偏移量,dp
      */
     private int mScrollOffset = 100;
+
+
+    /*----------------- 使用者可根据需要进行参数的修正 契合自己项目的需求-------------------*/
+
+    /**
+     * 设置指示器的高度
+     * @param indicatorHeightDp dp为单位
+     * @return
+     */
+    public NiceViewPagerIndicator setIndicatorHeight(int indicatorHeightDp){
+        this.mIndicatorStrokeWidth = indicatorHeightDp;
+        return this;
+    }
+
+    /**
+     * 是否与文字等长 --------
+     * @return
+     */
+    public NiceViewPagerIndicator setIndicatorLengthType(IndicatorType mIndicatorType){
+        this.mIndicatorType = mIndicatorType;
+        return this;
+    }
+
+
+    public NiceViewPagerIndicator setIndicatorShapeType(IndicatorShape indicatorShapeType){
+        this.mIndicatorShape = indicatorShapeType;
+        return this;
+    }
+
+    /**
+     * 设置文本指示器的水品左右水品padding
+     */
+    public NiceViewPagerIndicator setIndicatorHorlPadding(int tabHorizontalPadding){
+        this.mTabHorizontalPadding = tabHorizontalPadding;
+        return this;
+    }
+
+
+
+    /**
+     * 设置是否平分布局
+     * @param isExpand boolean
+     * @return
+     */
+    public NiceViewPagerIndicator setIsExpand(boolean isExpand){
+        this.isExpand = isExpand;
+        return this;
+    }
+
+    public NiceViewPagerIndicator setIndicatorColor(int indicatorColor){
+        this.mIndicatorColor = indicatorColor;
+        return this;
+    }
+
+    /**
+     * 设置未选中的颜色
+     * @param colorID
+     * @return
+     */
+    public NiceViewPagerIndicator setNormalTextColor(int colorID){
+        this.mNormalTextColor = colorID;
+        return this;
+    }
+
+    /**
+     * 设置选中的颜色
+     * @param colorID
+     * @return
+     */
+    public NiceViewPagerIndicator setSelectedTextColor(int colorID){
+        this.mSelectedTextColor = colorID;
+        return this;
+    }
+
+    /**
+     * 设置为选中的文字的颜色
+     * @param textNormalSp
+     * @return
+     */
+    public NiceViewPagerIndicator setNormalTextSize(int textNormalSp){
+        this.mNormalTextColor = textNormalSp;
+        return this;
+    }
+
+    /**
+     * 设置已经选中的文字的颜色
+     * @param textSelectedSp
+     * @return
+     */
+    public NiceViewPagerIndicator setSelectedTextSize(int textSelectedSp){
+        this.mSelectedTextSize = textSelectedSp;
+        return this;
+    }
+
+    /**
+     * 设置指示器的长度
+     * @param indicatorLength
+     * @return
+     */
+    public NiceViewPagerIndicator setIndicatorLength(int indicatorLength){
+        this.mIndicatorLength = indicatorLength;
+        return this;
+    }
+
+
+    /**
+     * ----------------------------------构造方法开始---------------------------------
+     */
+
+
     public NiceViewPagerIndicator(Context context) {
         this(context,null);
     }
@@ -147,6 +289,15 @@ public class NiceViewPagerIndicator extends HorizontalScrollView{
         setWillNotDraw(false);
     }
 
+    /**
+     * ----------------------------------构造方法结束---------------------------------
+     */
+
+
+    /**
+     * 属性初始化完成了绑定ViewPager 并执行各项初始化操作
+     * @param viewPager
+     */
     public void setUpViewPager(@NonNull ViewPager viewPager){
         this.mViewPager = viewPager;
         // 在adapter为空时抛出异常 解决后面报的空指针检查
@@ -168,10 +319,21 @@ public class NiceViewPagerIndicator extends HorizontalScrollView{
         mTabHorizontalPadding = (int)(mTabHorizontalPadding * density);
         mScrollOffset = (int)(mScrollOffset * density);
         mIndicatorLength =(int)(mIndicatorLength * density);
+        mTriangleHeight = (int)(mTriangleHeight * density);
+        mTriangleWidth = (int)(mTriangleWidth * density);
         addOnlyContainerChild();
         defTextIndicatorParams();
         initMeasureTextPaints();
         initIndicatorPaints();
+        initTrianglePaint();
+    }
+
+    private void initTrianglePaint() {
+        mTrianglePaint = new Paint();
+        mTrianglePaint.setAntiAlias(true);
+        mTrianglePaint.setDither(true);
+        mTrianglePaint.setColor(Color.WHITE);
+        mTrianglePaint.setStyle(Paint.Style.FILL);
     }
 
     private void initMeasureTextPaints() {
@@ -291,6 +453,14 @@ public class NiceViewPagerIndicator extends HorizontalScrollView{
         mLinearContainer.addView(textTab,isExpand?expandTabLayoutParams:wrapTabLayoutParams);
     }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mIndicatorHeight = h;
+        mIndicatorWidth = w;
+
+    }
+
     /**
      * 绘制指示器 ----- 计算指示器的起点与中点进行绘制
      * @param canvas
@@ -301,6 +471,13 @@ public class NiceViewPagerIndicator extends HorizontalScrollView{
         if (mTabCount == 0){
             return;
         }
+
+        if (IndicatorShape.TRIANGLE == mIndicatorShape){
+            initTriangleLocation();
+            canvas.drawPath(mTrianglePath,mTrianglePaint);
+            return;
+        }
+
         // 获得控件的高度
         final int height = getHeight();
         float nextLeft;
@@ -348,8 +525,47 @@ public class NiceViewPagerIndicator extends HorizontalScrollView{
         canvas.drawRect(mLineLeft, height - mIndicatorPaint.getStrokeWidth()/2, mLineRight, height, mIndicatorPaint);
     }
 
+
+    /*
+     * ----------------- 准备绘制白色的三角形指示器 ---------
+     */
+
+    private void initTriangleLocation() {
+        // 这里有问题嘛
+        float centerX = getTriangleCenterX(mCurrentIndex);
+        if (mCurrentIndex < mTabCount-1){
+            float nextCenterX = getTriangleCenterX(mCurrentIndex + 1);
+            centerX = centerX + (nextCenterX - centerX) * mCurrentPositionOffset;
+        }
+        if (mTrianglePath == null){
+            mTrianglePath = new Path();
+        }
+        mTrianglePath.reset();
+        mTrianglePath.moveTo(centerX - mTriangleWidth/2,mIndicatorHeight);
+        mTrianglePath.lineTo(centerX + mTriangleWidth/2, mIndicatorHeight);
+        mTrianglePath.lineTo(centerX, mIndicatorHeight - mTriangleHeight);
+        mTrianglePath.close();
+    }
+
     /**
-     * 获得指定tab中，文字的left和right
+     * 获得文本的中点
+     * @param position
+     */
+    private float  getTriangleCenterX(int position){
+        View child = mLinearContainer.getChildAt(position);
+        int left = child.getLeft();
+        int width = child.getWidth();
+        return left + width/2f;
+    }
+
+    /*
+     * ------------ 结束绘制白色的三角形指示器 ---------
+     */
+
+
+
+    /**
+     * 获得指定tab中，文字的left和right,线性指示器
      */
     @SuppressWarnings("ConstantConditions")
     private void getTextLocation(int position) {
@@ -360,6 +576,7 @@ public class NiceViewPagerIndicator extends HorizontalScrollView{
         textLocation.left = tab.getLeft() + (int) ((tabWidth - textWidth) / 2);
         textLocation.right = tab.getRight() - (int) ((tabWidth - textWidth) / 2);
     }
+
 
     /**
      * 根据定长绘制指示器
@@ -381,15 +598,45 @@ public class NiceViewPagerIndicator extends HorizontalScrollView{
 
 
     /**
+     * 滑动HorizontalScrollView 滚动方法
+     * @param position          标示下标ID
+     * @param currentTextLength 当前文本长度
+     * 比较关键 ---- 执行scrollView的滑动效果
+     *
+     *  这是很清除的,当水平方向滑动,值为正向左滑动
+     */
+    private void scrollToChild(int position, int currentTextLength) {
+        // 如果文本长度为空,或者平分模式则返回
+        if (mTabCount == 0 || isExpand){
+            return;
+        }
+        //getLeft():tab相对于父控件，即tabsContainer的left
+        View child = mLinearContainer.getChildAt(position);
+        int newScrollX = child.getLeft() + currentTextLength ;
+
+        //附加一个偏移量，防止当前选中的tab太偏左
+        //可以去掉看看是什么效果
+
+        // 相当于在原来基础上向右滑 mScrollOffset的距离,就达到了太左或者太有可以往中间靠的效果
+        if (position > 0 || currentTextLength > 0) {
+            newScrollX -= mScrollOffset;
+        }
+
+        if (newScrollX != lastScrollX) {
+            lastScrollX = newScrollX;
+            scrollTo(newScrollX, 0);
+        }
+    }
+
+
+    /**
      * 重写onClickListener,为了能够安全的将参数传递进来
      */
     private class TextClickSelectListener implements View.OnClickListener{
         private  int selectedIndex;
-
         TextClickSelectListener(int selectedIndex) {
             this.selectedIndex = selectedIndex;
         }
-
         @Override
         public void onClick(View v) {
             // 设置文本的选中----
@@ -425,128 +672,6 @@ public class NiceViewPagerIndicator extends HorizontalScrollView{
         public void onPageScrollStateChanged(int i) {
 
         }
-    }
-
-    /**
-     * 滑动HorizontalScrollView
-     * @param position          标示下标ID
-     * @param currentTextLength 当前文本长度
-     * 比较关键 ---- 执行scrollView的滑动效果
-     *
-     *  这是很清除的,当水平方向滑动,值为正向左滑动
-     */
-    private void scrollToChild(int position, int currentTextLength) {
-        // 如果文本长度为空,或者平分模式则返回
-        if (mTabCount == 0 || isExpand){
-            return;
-        }
-        //getLeft():tab相对于父控件，即tabsContainer的left
-        View child = mLinearContainer.getChildAt(position);
-        int newScrollX = child.getLeft() + currentTextLength ;
-
-        //附加一个偏移量，防止当前选中的tab太偏左
-        //可以去掉看看是什么效果
-
-        // 相当于在原来基础上向右滑 mScrollOffset的距离,就达到了太左或者太有可以往中间靠的效果
-        if (position > 0 || currentTextLength > 0) {
-            newScrollX -= mScrollOffset;
-        }
-
-        if (newScrollX != lastScrollX) {
-            lastScrollX = newScrollX;
-            scrollTo(newScrollX, 0);
-        }
-    }
-
-    /*----------------- 使用者可根据需要进行参数的修正 契合自己项目的需求-------------------*/
-
-    /**
-     * 设置指示器的高度
-     * @param indicatorHeightDp dp为单位
-     * @return
-     */
-    public NiceViewPagerIndicator setIndicatorHeight(int indicatorHeightDp){
-        this.mIndicatorStrokeWidth = indicatorHeightDp;
-        return this;
-    }
-
-    /**
-     * 是否与文字等长 --------
-     * @return
-     */
-    public NiceViewPagerIndicator setIndicatorLengthType(IndicatorType mIndicatorType){
-        this.mIndicatorType = mIndicatorType;
-        return this;
-    }
-
-    /**
-     * 设置文本指示器的水品左右水品padding
-     */
-    public NiceViewPagerIndicator setIndicatorHorlPadding(int tabHorizontalPadding){
-        this.mTabHorizontalPadding = tabHorizontalPadding;
-        return this;
-    }
-
-
-
-    /**
-     * 设置是否平分布局
-     * @param isExpand boolean
-     * @return
-     */
-    public NiceViewPagerIndicator setIsExpand(boolean isExpand){
-        this.isExpand = isExpand;
-        return this;
-    }
-
-    /**
-     * 设置未选中的颜色
-     * @param colorID
-     * @return
-     */
-    public NiceViewPagerIndicator setNormalTextColor(int colorID){
-        this.mNormalTextColor = colorID;
-        return this;
-    }
-
-    /**
-     * 设置选中的颜色
-     * @param colorID
-     * @return
-     */
-    public NiceViewPagerIndicator setSelectedTextColor(int colorID){
-        this.mSelectedTextColor = colorID;
-        return this;
-    }
-
-    /**
-     * 设置为选中的文字的颜色
-     * @param textNormalSp
-     * @return
-     */
-    public NiceViewPagerIndicator setNormalTextSize(int textNormalSp){
-        this.mNormalTextColor = textNormalSp;
-        return this;
-    }
-
-    /**
-     * 设置已经选中的文字的颜色
-     * @param textSelectedSp
-     * @return
-     */
-    public NiceViewPagerIndicator setSelectedTextSize(int textSelectedSp){
-        this.mSelectedTextSize = textSelectedSp;
-        return this;
-    }
-
-    /**
-     * 设置指示器的长度
-     * @param indicatorLength
-     * @return
-     */
-    public NiceViewPagerIndicator setIndicatorLength(int indicatorLength){
-        this.mIndicatorLength = indicatorLength;
-        return this;
     }
 
 }
