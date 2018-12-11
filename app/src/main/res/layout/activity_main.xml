@@ -39,14 +39,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
-            android:text="进度line"
+            android:text="进度条"
             android:textAllCaps="false"
             android:id="@+id/btnLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <Button
+            android:text="滑动"
+            android:id="@+id/btnScroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
-
-
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:text="绘图基础"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnShadow"
+            android:text="阴影效果"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/blur"
+            android:text="发光效果与阴影"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnBezier"

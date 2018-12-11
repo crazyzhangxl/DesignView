@@ -9,6 +9,9 @@ import com.example.apple.designview.activitys.BasicDraw2Activity;
 import com.example.apple.designview.activitys.BasicDrawActivity;
 import com.example.apple.designview.activitys.BezierActivity;
 import com.example.apple.designview.activitys.ProgressLineActivity;
+import com.example.apple.designview.activitys.ScrollShowActivity;
+import com.example.apple.designview.activitys.draw.BlurMaskActivity;
+import com.example.apple.designview.activitys.draw.ShadowActivity;
 import com.example.apple.designview.activitys.indicator.IndicatorDemo1Activity;
 import com.example.apple.designview.activitys.indicator.IndicatorDemo2Activity;
 import com.example.apple.designview.activitys.indicator.NiceIndicatorActivity;
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        /* ---------- 指示器 --------- */
         findViewById(R.id.indicator1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,13 +65,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btnBezier).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, BezierActivity.class));
-            }
-        });
-
         findViewById(R.id.indicator3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +76,36 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, WheelViewActivity.class));
+            }
+        });
+
+        findViewById(R.id.btnBezier).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BezierActivity.class));
+            }
+        });
+
+
+        /*  ---------  基础绘图 ---------- */
+        findViewById(R.id.btnShadow).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ShadowActivity.class));
+            }
+        });
+
+        findViewById(R.id.blur).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BlurMaskActivity.class));
+            }
+        });
+
+        findViewById(R.id.btnScroll).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ScrollShowActivity.class));
             }
         });
     }

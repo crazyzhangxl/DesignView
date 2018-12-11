@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activitys.draw.ShadowActivity">
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:id="@+id/api"
+        android:text="注意点: 禁止硬件加速 \n &#x0009;&#x0009;&#x0009;&#x0009;&#x0009;setLayerType(LAYER_TYPE_SOFTWARE,null)
+        &#x0009;&#x0009;&#x0009;核心api: \n setShawowLayer(float rasius,float x float y,int color)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/control"
+        android:layout_below="@id/api"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/open"
+            android:text="开启阴影"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/close"
+            android:text="关闭阴影"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <com.example.apple.designview.views.ShadowLayerView
+        android:layout_below="@id/control"
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:id="@+id/tvText"
+        android:layout_below="@id/shadow"
+        android:text="我是有阴影的,不信你看"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

@@ -31,11 +31,19 @@
         <activity
             android:name=".activitys.BezierActivity"
             android:label="贝塞尔曲线" />
-        <activity android:name=".activitys.indicator.NiceIndicatorActivity"
-            android:label="完善的指示器"/>
+        <activity
+            android:name=".activitys.indicator.NiceIndicatorActivity"
+            android:label="完善的指示器" />
         <activity android:name=".activitys.wheel.WheelViewActivity" />
-        <activity android:name=".activitys.ProgressLineActivity"
-            android:label="简易进度条"/>
+        <activity
+            android:name=".activitys.ProgressLineActivity"
+            android:label="简易进度条" />
+        <activity
+            android:name=".activitys.draw.ShadowActivity"
+            android:label="阴影效果" />
+        <activity android:name=".activitys.draw.BlurMaskActivity" />
+        <activity android:name=".activitys.ScrollShowActivity"
+            android:label="滑动展示"/>
     </application>
 
 </manifest>
